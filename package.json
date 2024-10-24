@@ -4,9 +4,13 @@
   "description": "Battleship project from The Odin Project Course to build a Battleship game and practice TDD.",
   "main": "index.js",
   "scripts": {
-    "test": "jest --watch *.js"
+    "test": "jest",
+    "watch": "jest --watch *.js"
   },
   "keywords": [],
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
 }
