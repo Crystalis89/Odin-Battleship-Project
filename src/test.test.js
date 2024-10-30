@@ -1,16 +1,5 @@
 const tests = require('./scripts');
 
-//    expect(tests.analyzeArray([1,2,3,4,5])).toEqual({
-//     'average': 3,
-//     'min': 1,
-//     'max': 5,
-//     'length': 5
-//  })
-
-
-// expect(tests.caesarCipher('Test', 3)).toBe('Whvw')
-// console.log(tests.Ship)
-
 //Ship
     //test that the ship gets the correctly assigned hp, location, and status value
 
@@ -19,10 +8,7 @@ const tests = require('./scripts');
     });
 
     //check that a hit correctly registers and updates the HP of the correct ship
-    // beforeEach(() =>{
-        // Initiate new player and computer for the following tests
     let testship
-        // })
 
     test('Hit, HP Reduce', () => {
         testship = testship = new tests.Ship(2, ['2-1', '2-2'], 'floating')
@@ -46,22 +32,35 @@ const tests = require('./scripts');
         expect(new tests.Gameboard()).toEqual({ships:[], fleetStatus:'floating', misses: 0 });
     });
 
-
     //check that it is able to place a ship on the board.
-    // test('Placeship', () => {
-    //     expect(new tests.Ship(2, ['2-1', '2-2'], 'floating')).toEqual({ hp: 2, location: ['2-1', '2-2'], status: 'floating' });
+    test('Place ship', () => {
+    
+        expect(new tests.Gameboard().validPlacement(['2-1', '2-2'], 3)).toEqual([{ hp: 3, location: ['2-1', '2-2'], status: 'floating' }]);
+    });
+    //Check that returns false if give it more than three coordinates.
+    test('Number of coordinates check', () => {
+    
+        expect(new tests.Gameboard().validPlacement(['2-1', '2-2', '2-3', '2-4'], 3)).toEqual(false);
+    });
 
-    // });
     //check that it does not place a ship in an invalid or overlapping spot
+    test('Invalid Placement', () => {
+       let newplayer = new tests.Player('player')
+//        console.log (newplayer)
+
+// console.log (newplayer.board)
+newplayer.board.validPlacement(['2-1', '2-2'])
+// console.log(newplayer.board)
+
+        expect(newplayer.board.validPlacement(['2-1', '2-2'], 3)).toEqual(false);
+    });
+
     //check that it registers a hit correctly and forwards that hit to the correct ship
-    //check that it properly displays if there is no hit
+    //check that it properly displays if there is no hit and increments the miss value of the right ship
     //check if all ships on a side have been sunk to declare winner/loser
     //check that it stops adding ships after they are all placed for both players
 
-
-
-//check that it correctly alternates turns
-//check that it correctly alternates who's turn it is when adding a ship
+//Check that it correctly alternates turns
 
 
 //player
@@ -73,13 +72,13 @@ const tests = require('./scripts');
 
 
     //check that player correctly creates a new ship
-    //check that player taking a turn correctly triggers other things to check for hit/miss
+
 
 //computer
-test('Create Computer', () => {
-   
-    expect(new tests.Player('computer')).toEqual({type:'computer', board:{ships:[], fleetStatus:'floating', misses: 0 }});
-});
+    test('Create Computer', () => {
+    
+        expect(new tests.Player('computer')).toEqual({type:'computer', board:{ships:[], fleetStatus:'floating', misses: 0 }});
+    });
     //check that computer correctly creates a new ship
     //check that computer randomly selects a valid spot when taking placing a ship
     //check that computer randomly selects a valid spot when taking a turn
