@@ -7,12 +7,31 @@ class Ship {
         this.status = status
     }
 
-    attackHit() {
+    attackHit(target) {
+
+        // console.log(target)
+
+        // console.log(targetindex)
+        if (target !== undefined) {
+            let targetIndex = this.location.indexOf(target[0]);
+            this.location[targetIndex] = false 
+
+        }
+        // console.table(this.location)
+
+            // console.log(this.location[targetIndex]);
+            // console.log(target[0] === this.location[targetIndex]);
 
         this.hp--
+
         // console.log(this.hp)
         if (this.hp === 0) {
             this.isSunk()
+            if (target !== undefined) {
+                let targetIndex = this.location.indexOf(target[0]);
+                this.location[targetIndex] = false 
+    
+            }
         }
         return this
    }
@@ -51,11 +70,22 @@ class Gameboard {
         for (const ship of this.ships) {
             //Get the location of the ship
             for (const loccheck of ship.location) {
+                if (loccheck === false) {
+                    continue
+                }
                 //Compare the location to up to three coordinates
                 if (loccheck === target[0] || loccheck === target[1] || loccheck === target[2] ) {
 
+
+
+                    //Change the check to account for if one of the values is false instead of the string in an array which signifies it has already been hit.
+
+
+
+
                     //If it hits call this which decrements the hp by 1
-                    ship.attackHit()
+                    ship.attackHit(target)
+                    // console.table(ship)
 
                     // console.log(ship.status)
                     // console.log(ship.hp)
@@ -102,8 +132,8 @@ class Gameboard {
         if (this.ships.length <= 5) {
 
             let split = []
-
             for (const tosplit of location) {
+
                 split.push(tosplit.split('-'))
                 
             }
@@ -141,8 +171,6 @@ class Gameboard {
                 }  
             }
             
-        
-  
 
         }
     } 
@@ -167,15 +195,39 @@ class Player {
         this.type = playerType
         this.board = new Gameboard()
     }
+
+    randomCoords(nodenumbers) {
+        let randomIndex 
+        if (nodenumbers === undefined) {
+            nodenumbers = [1, 2, 3];
+            randomIndex = Math.floor(Math.random() * nodenumbers.length); 
+        } else {
+            randomIndex = 0
+        }
+      
+        let firstnum
+        let secondnum
+        let coordinates = []
+
+        for (let i = 0; i < nodenumbers[randomIndex]; i++) {
+            firstnum = Math.floor(Math.random() * 10);
+            secondnum = Math.floor(Math.random() * 10);
+            coordinates.push(`{${firstnum}-${secondnum}}`)
+                    }
+        // console.table(coordinates)
+        return coordinates
+
+    }
+
+    //
+    determineTurn() {
+
+    }
     // There will be two types of players in the game, ‘real’ players and ‘computer’ players.
     //Each player object should contain its own gameboard.
 }
 
 
-
-// let testplayer = new Player('player')
-// console.log(testplayer)
-// console.log(testplayer)
 
 //Import your classes/factories into another file, and drive the game using event listeners to interact with your objects. Create a module that helps you manage actions that should happen in the DOM.
 

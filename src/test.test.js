@@ -137,9 +137,8 @@ let testship
         newplayer.board.validPlacement(['2-1', '2-2'])
         newplayer.board.validPlacement(['5-1', '5-2'])
 
-        // console.table(newplayer.board.ships)
 
-        expect(newplayer.board.receiveAttack(['2-1'])).toEqual([{ hp: 1, location: ['2-1', '2-2'], status: 'floating' }, { hp: 2, location: ['5-1', '5-2'], status: 'floating' }]);
+        expect(newplayer.board.receiveAttack(['2-1'])).toEqual([{ hp: 1, location: [false, '2-2'], status: 'floating' }, { hp: 2, location: ['5-1', '5-2'], status: 'floating' }]);
     });
     //Check that it errors if give it to many targets for attack at once.
     test('To many attack targets', () => {
@@ -196,20 +195,30 @@ let testship
 
 
     //check that computer correctly creates a new ship
-    //Still need to add random coordinate selection by computer
-    // test('Add ships to computer', () => {
-    //     newplayer = new tests.Player('computer')
+    test('Add ships to computer', () => {
+        newplayer = new tests.Player('computer')
+        let testcoords = newplayer.randomCoords()
+  
 
 
-    //     expect(newplayer.board.validPlacement(['2-1', '2-2'])).toEqual([{ hp: 2, location: ['2-1', '2-2'], status: 'floating' }])
-    // });
+        expect(newplayer.board.validPlacement(testcoords)).toEqual([{ hp:testcoords.length, location: testcoords, status: 'floating' }])
+    });
 
    
     //check that computer randomly selects a valid target when taking a turn
+    // test('Random Target for attack', () => {
+    //     newplayer = new tests.Player('computer')
+    //     let testtarget = newplayer.randomCoords(1)
+    //     newplayer.board.validPlacement(['2-1', '2-2'])
 
+
+
+    //     expect(newplayer.board.receiveAttack(testtarget)).toEqual([{ hp:testcoords.length, location: testcoords, status: 'floating' }])
+    // });
 
     
     //check that computer taking a turn correctly triggers other things to check for hit/miss
+
 
 
 

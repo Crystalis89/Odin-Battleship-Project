@@ -2,7 +2,7 @@
   "name": "odin-battleship-project",
   "version": "1.0.0",
   "description": "Battleship project from The Odin Project Course to build a Battleship game and practice TDD.",
-  "main": "index.js",
+  "main": "main.js",
   "scripts": {
     "test": "jest",
     "watch": "jest --watch *.js"
